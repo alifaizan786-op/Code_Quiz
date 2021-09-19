@@ -92,23 +92,6 @@ function showQuestion() {
     }
 }
 
-// function showQuestion(question) {
-//   questionEl.innerText = randQuestion().question
-//   randQuestion().answers.forEach(answer => {
-//     const button = document.createElement('button')
-//     button.innerText = answer.text
-//     button.classList.add('btn')
-//     if (answer.correct) {
-//       button.dataset.correct = answer.correct
-//     }
-//     button.addEventListener('click', selectAnswer)
-//     choice.appendChild(button)
-//   })
-// }
-
-
-
-
 function selectAnswer(){
     
 }
