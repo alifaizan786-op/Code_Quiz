@@ -3,16 +3,18 @@ var start = document.querySelector (".start")
 var questionEl = document.querySelector (".question")
 var choice = document.querySelector (".choice")
 var highscore = document.querySelector (".highscore")
+var currentScore = document.querySelector(".currentscore")
 var questionIndex
+var timeLeft = 60;
 
-console.log(questionEl);
+
 
 const questions = [
     {
       question: 'Inside which HTML element do we put the JavaScript?',
       answers: [
         { text: '<javascript>', correct: false },
-        { text: 'script', correct: true },
+        { text: '<script>', correct: true },
         { text: 'js', correct: false },
         { text: 'scripting', correct: false }
       ]
@@ -82,22 +84,45 @@ function randQuestion() {
 
 
 function showQuestion() {
-    questionEl.innerText = randQuestion().question
-    for (var i = 0; i < randQuestion().answers.length; i++){
+    var random = randQuestion()
+    questionEl.innerText = random.question
+    for (var i = 0; i < random.answers.length; i++){
       const button = document.createElement ('button')
-      button.innerText = randQuestion().answers.text
-      button.dataset.correct = randQuestion().answers.correct
-      button.addEventListener('click', selectAnswer)
+      button.innerText = random.answers[i].text
+      if (random.answers[i].correct){
+      button.dataset.correct = random.answers[i].correct
+      }
+      button.addEventListener('click', selectChoice)
       choice.appendChild(button)
     }
 }
 
-function selectAnswer(){
+function selectChoice(event){
+  var selectedChoice = event.target
+  var cursco = 0;
+  if (selectedChoice.dataset.correct){
+    cursco ++;
+    currentScore.textContent = cursco
     
+  }
+  else{
+    timeLeft = timeLeft - 10 ;
+  }
+  nextQuestion
+}
+
+function nextQuestion (){
+  showQuestion()
+
+}
+
+function resetState (){
+  while (choice.firstChild) {
+    choice.removeChild(choice.firstChild)
+  }
 }
 
 function countdown() {
-    var timeLeft = 10;
     var timeInterval = setInterval(function () {
         timeLeft--;
         timer.textContent = timeLeft;
