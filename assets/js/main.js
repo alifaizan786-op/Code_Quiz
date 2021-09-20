@@ -81,10 +81,9 @@ function randQuestion() {
     return questions[Math.floor(Math.random() * questions.length)]
 }
 
-
+var random = randQuestion()
 
 function showQuestion() {
-    var random = randQuestion()
     questionEl.innerText = random.question
     for (var i = 0; i < random.answers.length; i++){
       const button = document.createElement ('button')
@@ -97,6 +96,8 @@ function showQuestion() {
     }
 }
 
+console.log(questions.indexOf(random));
+
 function selectChoice(event){
   var selectedChoice = event.target
   var cursco = 0;
@@ -108,10 +109,12 @@ function selectChoice(event){
   else{
     timeLeft = timeLeft - 10 ;
   }
-  nextQuestion
+  nextQuestion()
 }
 
 function nextQuestion (){
+  questions.splice(0,1, questions.indexOf(random))
+  resetState()
   showQuestion()
 
 }
