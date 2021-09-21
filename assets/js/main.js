@@ -4,8 +4,11 @@ var questionEl = document.querySelector (".question")
 var choice = document.querySelector (".choice")
 var highscore = document.querySelector (".highscore")
 var currentScore = document.querySelector(".currentscore")
+var saveScore = document.querySelector(".save")
 var questionIndex
 var timeLeft = 60;
+var random
+var cursco = 0;
 
 
 
@@ -72,7 +75,7 @@ function startQuiz() {
     questionEl.classList.remove('hide')
     choice.classList.remove('hide')
     start.classList.add('hide')
-    randQuestion()
+    random = randQuestion()
     showQuestion()
 }
 
@@ -81,7 +84,7 @@ function randQuestion() {
     return questions[Math.floor(Math.random() * questions.length)]
 }
 
-var random = randQuestion()
+
 
 function showQuestion() {
     questionEl.innerText = random.question
@@ -96,15 +99,13 @@ function showQuestion() {
     }
 }
 
-console.log(questions.indexOf(random));
+
 
 function selectChoice(event){
   var selectedChoice = event.target
-  var cursco = 0;
   if (selectedChoice.dataset.correct){
     cursco ++;
     currentScore.textContent = cursco
-    
   }
   else{
     timeLeft = timeLeft - 10 ;
@@ -113,17 +114,31 @@ function selectChoice(event){
 }
 
 function nextQuestion (){
-  questions.splice(0,1, questions.indexOf(random))
-  resetState()
+  console.log(questions.indexOf(random))
+  questions.splice(questions.indexOf(random),1)
+  if (questions.length){
+    random = randQuestion()
+  choice.innerHTML = ""
   showQuestion()
-
-}
-
-function resetState (){
-  while (choice.firstChild) {
-    choice.removeChild(choice.firstChild)
+  }
+  else { endquiz()
   }
 }
+
+
+function endquiz() {
+  questionEl.classList.add(".hide")
+  choice.classList.add(".hide")
+  saveScore.classList.remove(".hide")
+
+
+}
+// function resetState (){
+  
+//   while (choice.firstChild) {
+//     choice.removeChild(choice.firstChild)
+//   }
+// }
 
 function countdown() {
     var timeInterval = setInterval(function () {
