@@ -53,12 +53,36 @@ button {
 
 .lost {
     background-color: var(--lost);
+    transition: 0.5s;
 }
 
 .won {
     background-color: var(--won);
+    transition: 0.5s;
+}
+
+.neutral {
+    background-color: var(--neutral);
+    transition: 0.5s;
 }
 
 .hide {
     display: none;
+}
+
+.highscoretable {
+    width: 90vw;
+    height: 75vh;
+}
+
+
+table {
+    width: 75vw;
+
+}
+
+.listEl td{
+    border-left:solid black;
+    border-width: 0px 3px;
+
 }

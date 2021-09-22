@@ -1,21 +1,20 @@
 var timer = document.querySelector (".timer")
+var body = document.querySelector (".bod")
 var start = document.querySelector (".start")
 var questionEl = document.querySelector (".question")
 var choice = document.querySelector (".choice")
-var highscore = document.querySelector (".highscore")
+// var highscore = document.querySelector (".highscore")
 var currentScore = document.querySelector (".currentscore")
 var saveScore = document.querySelector(".save")
-var userscore = document.querySelector("yourScore")
-var usertime = document.querySelector("yourTime")
+var userscore = document.querySelector(".yourScore")
+var usertime = document.querySelector(".yourTime")
+var saveButton = document.querySelector (".savebutton")
 var timeLeft = 60;
 var random
 var cursco = 0;
 var player = document.querySelector(".playerName")
-var playerScore = {
-  Score: currentScore.value,
-  Timetaken: timeLeft.value,
-  playerName: player.value
-};
+var scoresList = JSON.parse(localStorage.getItem("scoresList")) || [];
+
 
 
 
@@ -75,8 +74,22 @@ const questions = [
 start.addEventListener("click", function (event) {
     startQuiz();
     countdown();
-
 });
+
+saveButton.addEventListener("click", function(event){
+  saveGame()
+
+})
+
+function saveGame() {
+  var playerScore = {
+    score: cursco,
+    timeTake: timeLeft,
+    playerName: player.value
+  }
+  scoresList.push(playerScore)
+  localStorage.setItem("scoresList", JSON.stringify(scoresList))
+}
 
 function startQuiz() {
     questionEl.classList.remove('hide')
@@ -94,6 +107,16 @@ function randQuestion() {
 
 
 function showQuestion() {
+  setTimeout(function(){
+    if (body.classList.contains("lost")){
+      body.classList.remove("lost")
+    }
+    if (body.classList.contains("won")){
+      body.classList.remove("won")
+    }
+    body.classList.add("neutral")
+
+  },500)
     questionEl.innerText = random.question
     for (var i = 0; i < random.answers.length; i++){
       const button = document.createElement ('button')
@@ -113,9 +136,13 @@ function selectChoice(event){
   if (selectedChoice.dataset.correct){
     cursco ++;
     currentScore.textContent = cursco
+    body.classList.remove("neutral")
+    body.classList.add("won")
   }
   else{
     timeLeft = timeLeft - 10 ;
+    body.classList.remove("neutral")
+    body.classList.add("lost")
   }
   nextQuestion()
 }
