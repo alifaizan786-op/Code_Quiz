@@ -5,6 +5,7 @@ var listEl = document.querySelector(".listEl")
 
 clearscore.addEventListener("click", function(event){
     localStorage.clear();
+    location.reload();
 })
 
 console.log(highScoreList);
