@@ -3,12 +3,19 @@ var start = document.querySelector (".start")
 var questionEl = document.querySelector (".question")
 var choice = document.querySelector (".choice")
 var highscore = document.querySelector (".highscore")
-var currentScore = document.querySelector(".currentscore")
+var currentScore = document.querySelector (".currentscore")
 var saveScore = document.querySelector(".save")
-var questionIndex
+var userscore = document.querySelector("yourScore")
+var usertime = document.querySelector("yourTime")
 var timeLeft = 60;
 var random
 var cursco = 0;
+var player = document.querySelector(".playerName")
+var playerScore = {
+  Score: currentScore.value,
+  Timetaken: timeLeft.value,
+  playerName: player.value
+};
 
 
 
@@ -113,42 +120,48 @@ function selectChoice(event){
   nextQuestion()
 }
 
+
+
+
 function nextQuestion (){
-  console.log(questions.indexOf(random))
   questions.splice(questions.indexOf(random),1)
-  if (questions.length){
-    random = randQuestion()
-  choice.innerHTML = ""
-  showQuestion()
+  if (questions.length === 0){
+    endquiz()
   }
-  else { endquiz()
+  else { 
+    random = randQuestion()
+    choice.innerHTML = ""
+    showQuestion()
   }
 }
-
 
 function endquiz() {
-  questionEl.classList.add(".hide")
-  choice.classList.add(".hide")
-  saveScore.classList.remove(".hide")
-
-
-}
-// function resetState (){
+  questionEl.classList.add("hide")
+  choice.classList.add("hide")
+  saveScore.classList.remove("hide")
+  userscore.textContent = cursco
+  usertime.textContent = timeLeft
   
-//   while (choice.firstChild) {
-//     choice.removeChild(choice.firstChild)
-//   }
-// }
+}
+
 
 function countdown() {
     var timeInterval = setInterval(function () {
         timeLeft--;
         timer.textContent = timeLeft;
 
+        if (questions.length === 0){
+          clearInterval(timeInterval)
+          endquiz()
+          timer.textContent = timeLeft
+        }
         if (timeLeft === 0) {
+            endquiz()
             clearInterval(timeInterval);
             timer.textContent = "";
             //other functions
         }
     }, 1000);
 }
+
+
