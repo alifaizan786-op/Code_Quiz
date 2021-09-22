@@ -1,8 +1,7 @@
 # Code_Quiz
 
-```md
-    ![alt text](assets/images/game.png)
-    ```
+[alt text](assets/images/game.PNG)
+
 
 ## Table of Contents (Optional)
 - [About](#about)
