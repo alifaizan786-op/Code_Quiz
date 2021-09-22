@@ -163,6 +163,16 @@ function nextQuestion (){
 }
 
 function endquiz() {
+  setTimeout(function(){
+    if (body.classList.contains("lost")){
+      body.classList.remove("lost")
+    }
+    if (body.classList.contains("won")){
+      body.classList.remove("won")
+    }
+    body.classList.add("neutral")
+
+  },500)
   questionEl.classList.add("hide")
   choice.classList.add("hide")
   saveScore.classList.remove("hide")
