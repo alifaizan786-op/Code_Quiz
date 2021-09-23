@@ -3,7 +3,7 @@
 ![alt text](assets/images/game.png)
 
 
-## Table of Contents (Optional)
+## Table of Contents
 - [About](#about)
 - [Usage](#usage)
 - [Credits](#credits)
