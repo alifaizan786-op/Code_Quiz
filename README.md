@@ -1,6 +1,6 @@
 # Code_Quiz
 
-![alt text](assets/images/game.PNG)
+![alt text](assets/images/game.png)
 
 
 ## Table of Contents (Optional)
