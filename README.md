@@ -1,4 +1,6 @@
 # Code_Quiz
+![GitHub](https://img.shields.io/github/license/alifaizan786-op/Code_Quiz?style=plastic)
+![Lines of code](https://img.shields.io/tokei/lines/github/alifaizan786-op/Code_Quiz?style=plastic)
 
 ![alt text](assets/images/game.png)
 
